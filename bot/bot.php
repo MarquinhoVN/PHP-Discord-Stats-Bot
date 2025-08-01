@@ -2,7 +2,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
-echo 'a';
+echo 'aaa';
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../'); // Caminho correto para a raiz
 $dotenv->load();
