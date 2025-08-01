@@ -1,35 +1,42 @@
-version: '3.8'
+version: "3.8"
 
 services:
   postgres:
-    image: postgres:12
-    container_name: pg-bot
+    container_name: post
+    image: postgres:16
     restart: always
-    env_file: .env
-    ports:
-      - "5432:5432"
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
     volumes:
       - pgdata:/var/lib/postgresql/data
-    networks:
-      - botnet
+    ports:
+      - "5432:5432"
 
-  discord:
+  web:
+    container_name: web
     build:
-      context: .
-      dockerfile: Dockerfile.api
-    container_name: discord
-    restart: always
-    depends_on:
-      - postgres
-    env_file: .env
+      context: .         
+      dockerfile: web/Dockerfile
     volumes:
       - .:/app
     working_dir: /app
-    networks:
-      - botnet
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+
+  bot:
+    container_name: bot
+    build:
+      context: .         
+      dockerfile: bot/Dockerfile
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - postgres
 
 volumes:
   pgdata:
-
-networks:
-  botnet:
