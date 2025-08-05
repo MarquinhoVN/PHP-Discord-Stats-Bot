@@ -2,10 +2,13 @@
 
 // Carrega o autoload do Composer
 use App\Database\migrations\CreateFamiliasTable;
-use App\Database\migrations\CreateFichaTable;
 use App\Database\migrations\CreateStatusPrimariosTable;
 use App\Database\migrations\CreateStatusSecundariosTable;
 use App\Database\migrations\CreateUsuariosTable;
+use App\Database\migrations\CreateRecursosAtuaisTable;
+use App\Database\migrations\CreateBatalhasTable;
+use App\Database\migrations\CreateEquipamentosTable;
+use App\Database\migrations\CreateUsuarioEquipamentosTable;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
@@ -31,10 +34,13 @@ class Migrate
     public function migrateUp()
     {
         $this->runMigration(new CreateFamiliasTable());
-        $this->runMigration(new CreateFichaTable());
         $this->runMigration(new CreateUsuariosTable());
         $this->runMigration(new CreateStatusPrimariosTable());
         $this->runMigration(new CreateStatusSecundariosTable());
+        $this->runMigration(new CreateRecursosAtuaisTable());
+        $this->runMigration(new CreateBatalhasTable());
+        $this->runMigration(new CreateEquipamentosTable());
+        $this->runMigration(new CreateUsuarioEquipamentosTable());
     }
 
     public function run()

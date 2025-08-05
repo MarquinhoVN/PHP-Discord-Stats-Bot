@@ -10,12 +10,14 @@ class CreateStatusSecundariosTable
         $query = "
             CREATE TABLE IF NOT EXISTS status_secundarios (
                 id SERIAL PRIMARY KEY,
+                usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
                 hp INT DEFAULT 100,
                 chakra INT DEFAULT 100,
                 ninjutsu INT DEFAULT 0,
                 taijutsu INT DEFAULT 0,
                 kenjutsu INT DEFAULT 0,
-                velocidade INT DEFAULT 0
+                velocidade INT DEFAULT 0,
+                UNIQUE (usuario_id)
             );
         ";
 
