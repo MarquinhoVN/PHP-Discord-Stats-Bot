@@ -9,6 +9,7 @@ use App\Database\migrations\CreateRecursosAtuaisTable;
 use App\Database\migrations\CreateBatalhasTable;
 use App\Database\migrations\CreateEquipamentosTable;
 use App\Database\migrations\CreateUsuarioEquipamentosTable;
+use App\Database\migrations\UpdateUsuariosTable;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
@@ -41,6 +42,7 @@ class Migrate
         $this->runMigration(new CreateBatalhasTable());
         $this->runMigration(new CreateEquipamentosTable());
         $this->runMigration(new CreateUsuarioEquipamentosTable());
+        $this->runMigration(new UpdateUsuariosTable());
     }
 
     public function run()
