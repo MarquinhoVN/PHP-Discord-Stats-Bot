@@ -41,11 +41,40 @@ try {
         );
     ");
 
+    // Famílias
+    $conn->exec("
+    CREATE TABLE IF NOT EXISTS familias (
+        id SERIAL PRIMARY KEY,
+        nome VARCHAR(100) UNIQUE NOT NULL,
+        bonus_hp_percent INT DEFAULT 0,
+        bonus_chakra_percent INT DEFAULT 0,
+        bonus_ninjutsu_percent INT DEFAULT 0,
+        bonus_taijutsu_percent INT DEFAULT 0,
+        bonus_kenjutsu_percent INT DEFAULT 0,
+        bonus_velocidade_percent INT DEFAULT 0
+    );
+");
+
+    // Equipamentos
+    $conn->exec("
+    CREATE TABLE IF NOT EXISTS equipamentos (
+        id SERIAL PRIMARY KEY,
+        nome VARCHAR(100) UNIQUE NOT NULL,
+        bonus_hp_percent INT DEFAULT 0,
+        bonus_chakra_percent INT DEFAULT 0,
+        bonus_ninjutsu_percent INT DEFAULT 0,
+        bonus_taijutsu_percent INT DEFAULT 0,
+        bonus_kenjutsu_percent INT DEFAULT 0,
+        bonus_velocidade_percent INT DEFAULT 0
+    );
+");
+
     // Ficha do jogador
     $conn->exec("
         CREATE TABLE IF NOT EXISTS ficha (
             id SERIAL PRIMARY KEY,
             usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+            familia_id INT NOT NULL REFERENCES familias(id) ON DELETE CASCADE,
             status_primarios_id INT NOT NULL REFERENCES status_primarios(id) ON DELETE CASCADE,
             status_secundarios_id INT NOT NULL REFERENCES status_secundarios(id) ON DELETE CASCADE,
             criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -73,6 +102,17 @@ try {
             data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     ");
+
+    // Equipamentos do personagem
+    $conn->exec("
+    CREATE TABLE IF NOT EXISTS ficha_equipamentos (
+        id SERIAL PRIMARY KEY,
+        ficha_id INT NOT NULL REFERENCES ficha(id) ON DELETE CASCADE,
+        equipamento_id INT NOT NULL REFERENCES equipamentos(id) ON DELETE CASCADE,
+        slot VARCHAR(50),
+        equipado BOOLEAN DEFAULT TRUE
+    );
+");
 
     echo "✅ Todas as tabelas foram criadas com sucesso!\n";
 
