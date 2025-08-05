@@ -24,7 +24,7 @@ class UserController
     {
         $usuarios = $this->usuarioService->listarUsuarios();
         header('Content-Type: application/json');
-        echo json_encode($usuarios);
+        echo json_encode(['abab']);
     }
 
     public function show($id)
