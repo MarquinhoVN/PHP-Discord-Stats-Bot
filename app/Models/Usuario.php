@@ -30,6 +30,26 @@ class Usuario
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function findByDiscordId($id)
+    {
+        $stmt = $this->db->prepare("SELECT SS.hp,
+                                                 SS.chakra,
+                                                 SS.ninjutsu,
+                                                 SS.taijutsu,
+                                                 SS.kenjutsu,
+                                                 SS.velocidade 
+                                          FROM usuarios U
+                                            JOIN familias F ON U.familia_id = F.id
+                                            JOIN status_primarios SP ON U.id = SP.usuario_id
+                                            JOIN status_secundarios SS ON U.id = SS.usuario_id
+                                            LEFT JOIN usuario_equipamentos UE ON UE.usuario_id = U.id AND UE.equipado = true
+                                            LEFT JOIN equipamentos E ON UE.equipamento_id = E.id 
+                                          WHERE U.discord_id = ?"
+        );
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function save()
     {
         if ($this->id) {

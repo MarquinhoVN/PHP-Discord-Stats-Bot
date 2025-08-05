@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Usuario;
+use http\Exception\InvalidArgumentException;
+
 class CharacterService
 {
     public $str;
@@ -15,18 +18,25 @@ class CharacterService
     public $kenjutsu;
 
     public function __construct(
+        $db = null,
         $str = null,
         $cha = null,
         $dex = null,
-        $user_id = null,
+        $user_id = null
     )
     {
+        $user = (new Usuario($db))->findByDiscordId($user_id);
+
+        if (!$user) {
+            throw new InvalidArgumentException('Não tem um usuário com esse discord');
+        }
+
         // Helzen
         if ($user_id === '268068444237201410') {
 
-            $this->str = 100;
-            $this->cha = 1200;
-            $this->dex = 950;
+            $this->str = 10;
+            $this->cha = 10;
+            $this->dex = 10;
 
             $multipliers = [
               'hp' => 20,
@@ -72,7 +82,7 @@ class CharacterService
             ];
 
         // Cayo '386225545819586562'
-        } elseif ($user_id === '1011095226468806697') {
+        } elseif ($user_id === '386225545819586562') {
             $this->str = 200;
             $this->cha = 870;
             $this->dex = 1000;
