@@ -2,35 +2,35 @@
 
 namespace App\Controllers;
 
+use App\Database\Database;
+use App\Models\User;
+use App\Repositories\UserRepository;
+use App\Services\UserService;
+
 class UserController
 {
-    // Método para listar os usuários
+    private $usuarioService;
+
+    public function __construct()
+    {
+        $db = new Database();
+        $conn = $db->getConnection();
+
+        $usuarioRepository = new UserRepository($conn);
+        $this->usuarioService = new UserService($usuarioRepository);
+    }
+
     public function index()
     {
-        echo "Listagem de usuários";
+        $usuarios = $this->usuarioService->listarUsuarios();
+        header('Content-Type: application/json');
+        echo json_encode($usuarios);
     }
 
-    // Método para exibir um usuário específico
-    public function show()
+    public function show($id)
     {
-        echo "Detalhes de um usuário";
-    }
-
-    // Método para armazenar um novo usuário
-    public function store()
-    {
-        echo "Armazenando um novo usuário";
-    }
-
-    // Método para atualizar um usuário
-    public function update()
-    {
-        echo "Atualizando um usuário";
-    }
-
-    // Método para excluir um usuário
-    public function destroy()
-    {
-        echo "Excluindo um usuário";
+        $usuario = $this->usuarioService->buscarUsuario($id);
+        header('Content-Type: application/json');
+        echo json_encode($usuario);
     }
 }

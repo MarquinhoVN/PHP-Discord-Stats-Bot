@@ -2,6 +2,10 @@
 // Autoload do Composer, caso esteja usando
 require_once '../../vendor/autoload.php';
 
+use App\Database\Database;
+$db = (new Database())->getConnection();
+$GLOBALS['db'] = $db;
+
 // Incluir o arquivo de rotas
 $routes = require '../routes.php';
 
