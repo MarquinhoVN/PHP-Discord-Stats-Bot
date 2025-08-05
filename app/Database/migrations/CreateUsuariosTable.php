@@ -10,8 +10,6 @@ class CreateUsuariosTable
             CREATE TABLE IF NOT EXISTS usuarios (
                 id SERIAL PRIMARY KEY,
                 nome VARCHAR(255) NOT NULL,
-                familia_id INT,
-                FOREIGN KEY (familia_id) REFERENCES familias(id),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         ";
