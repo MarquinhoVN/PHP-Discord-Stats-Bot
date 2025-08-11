@@ -12,14 +12,19 @@ class UserService
     {
         $this->userRepository = $userRepository;
     }
-
-    public function listarUsuarios()
+    public function criarUsuario($discord_id, $nome){
+        return $this->userRepository->createUser($discord_id, $nome);
+    }
+    public function findAttributes($id)
     {
-        return $this->userRepository->getAll();
+        return $this->userRepository->detailByDiscordId($id);
+    }
+    public function findUser($id)
+    {
+        return $this->userRepository->findByDiscordId($id);
     }
 
-    public function buscarUsuario($id)
-    {
-        return $this->userRepository->findById($id);
+    public function updateName($id, $nome){
+        $this->userRepository->updateName($id, $nome);
     }
 }

@@ -11,3 +11,4 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 CMD ["php", "bot/bot.php"]
+

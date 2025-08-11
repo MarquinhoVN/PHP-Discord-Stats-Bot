@@ -10,8 +10,8 @@ class CreateStatusSecundariosTable
         $query = "
             CREATE TABLE IF NOT EXISTS status_secundarios (
                 id SERIAL PRIMARY KEY,
-                hp INT DEFAULT 100,
-                chakra INT DEFAULT 100,
+                hp INT DEFAULT 0,
+                chakra INT DEFAULT 0,
                 ninjutsu INT DEFAULT 0,
                 taijutsu INT DEFAULT 0,
                 kenjutsu INT DEFAULT 0,

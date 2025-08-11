@@ -1,7 +1,8 @@
 {
     "require": {
       "team-reflex/discord-php": "^7.0",
-      "vlucas/phpdotenv": "^5.5"
+      "vlucas/phpdotenv": "^5.5",
+      "ext-pdo": "*"
     },
     "autoload": {
       "psr-4": {

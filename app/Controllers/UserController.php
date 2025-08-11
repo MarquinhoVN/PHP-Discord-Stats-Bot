@@ -19,18 +19,24 @@ class UserController
         $usuarioRepository = new UserRepository($conn);
         $this->usuarioService = new UserService($usuarioRepository);
     }
-
-    public function index()
+    public function show($discord_id)
     {
-        $usuarios = $this->usuarioService->listarUsuarios();
-        header('Content-Type: application/json');
-        echo json_encode(['abab']);
-    }
+       $usuario = $this->usuarioService->findAttributes($discord_id);
+        if (!$usuario) {
+            return "Usuário não encontrado.";
+        }
 
-    public function show($id)
-    {
-        $usuario = $this->usuarioService->buscarUsuario($id);
-        header('Content-Type: application/json');
-        echo json_encode($usuario);
+        $mensagemFormatada = "🧬 **Atributos de {$usuario['nome']}**:\n" .
+            "💪 **Força**: {$usuario['forca']}\n" .
+            "🌀 **Chakra Base**: {$usuario['chakra']}\n" .
+            "⚡ **Detreza**: {$usuario['destreza']}\n\n" .
+            "🧡 **HP**: {$usuario['vida']}\n" .
+            "🌀 **Chakra**: {$usuario['reserva_de_chakra']}\n" .
+            "👤 **Ninjutsu**: {$usuario['ninjutsu']}\n" .
+            "💪 **Taijutsu**: {$usuario['taijutsu']}\n" .
+            "⚔️ **Kenjutsu**: {$usuario['kenjutsu']}\n" .
+            "⚡ **Velocidade**: {$usuario['velocidade']}";
+
+        return $mensagemFormatada;
     }
 }

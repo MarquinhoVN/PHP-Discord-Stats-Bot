@@ -24,7 +24,6 @@ class Migrate
 
     public function runMigration($migration)
     {
-        echo "Rodando migração: " . get_class($migration) . "\n";
         $migration->up($this->pdo);
     }
 

@@ -10,9 +10,8 @@ class CreateFamiliasTable
             CREATE TABLE IF NOT EXISTS familias (
                 id SERIAL PRIMARY KEY,
                 nome VARCHAR(255) NOT NULL,
-                bonus_forca INT DEFAULT 0,
-                bonus_chakra INT DEFAULT 0,
                 bonus_hp INT DEFAULT 0,
+                bonus_chakra INT DEFAULT 0,
                 bonus_ninjutsu INT DEFAULT 0,
                 bonus_taijutsu INT DEFAULT 0,
                 bonus_kenjutsu INT DEFAULT 0,

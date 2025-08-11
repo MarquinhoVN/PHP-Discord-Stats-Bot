@@ -9,9 +9,9 @@ class CreateStatusPrimariosTable
         $query = "
             CREATE TABLE IF NOT EXISTS status_primarios (
                 id SERIAL PRIMARY KEY,
-                destreza INT DEFAULT 0,
-                forca INT DEFAULT 0,
-                chakra INT DEFAULT 0
+                destreza INT DEFAULT 100,
+                forca INT DEFAULT 100,
+                chakra INT DEFAULT 100
             );
         ";
 

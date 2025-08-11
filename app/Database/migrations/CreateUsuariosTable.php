@@ -9,6 +9,7 @@ class CreateUsuariosTable
         $query = "
             CREATE TABLE IF NOT EXISTS usuarios (
                 id SERIAL PRIMARY KEY,
+                discord_id INT NOT NULL,
                 nome VARCHAR(255) NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
